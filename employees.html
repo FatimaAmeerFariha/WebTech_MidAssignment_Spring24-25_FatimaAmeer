@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Employees</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Registered Employees</h2>
+  <table border="1" id="empTable">
+    <tr>
+      <th>ID</th><th>Name</th><th>Email</th><th>Department</th>
+      <th>Date</th><th>Gender</th><th>Type</th><th>Actions</th>
+    </tr>
+    <tr>
+      <td>EMP101</td><td>Fatima</td><td>fatima@mail.com</td><td>HR</td>
+      <td>2023-01-10</td><td>Female</td><td>Full-Time</td>
+      <td><button onclick="loadEdit(this)">Edit</button><button onclick="deleteRow(this)">Delete</button></td>
+    </tr>
+    <tr>
+      <td>EMP102</td><td>Safwan</td><td>safwan@mail.com</td><td>IT</td>
+      <td>2023-03-15</td><td>Male</td><td>Part-Time</td>
+      <td><button onclick="loadEdit(this)">Edit</button><button onclick="deleteRow(this)">Delete</button></td>
+    </tr>
+    <tr>
+      <td>EMP103</td><td>Ramisha</td><td>ramisha@mail.com</td><td>Sales</td>
+      <td>2022-08-01</td><td>Female</td><td>Full-Time</td>
+      <td><button onclick="loadEdit(this)">Edit</button><button onclick="deleteRow(this)">Delete</button></td>
+    </tr>
+    <tr>
+      <td>EMP104</td><td>Seeyam</td><td>seeyam@mail.com</td><td>Marketing</td>
+      <td>2021-09-12</td><td>Male</td><td>Part-Time</td>
+      <td><button onclick="loadEdit(this)">Edit</button><button onclick="deleteRow(this)">Delete</button></td>
+    </tr>
+    <tr>
+      <td>EMP105</td><td>Suha</td><td>suha@mail.com</td><td>HR</td>
+      <td>2020-11-22</td><td>Female</td><td>Full-Time</td>
+      <td><button onclick="loadEdit(this)">Edit</button><button onclick="deleteRow(this)">Delete</button></td>
+    </tr>
+  </table>
+  <div id="editSection" style="display:none; margin-top: 20px;">
+    <h3>Edit Employee</h3>
+    <label>ID: <input type="text" id="editId"></label><br>
+    <label>Name: <input type="text" id="editName"></label><br>
+    <label>Email: <input type="text" id="editEmail"></label><br>
+    <label>Department: <input type="text" id="editDept"></label><br>
+    <label>Date: <input type="date" id="editDate"></label><br>
+    <label>Gender: <input type="text" id="editGender"></label><br>
+    <label>Type: <input type="text" id="editType"></label><br><br>
+    <button onclick="saveEdit()">Save Changes</button>
+  </div>
+  <br>
+  <a href="index.html"><button>Back to Home</button></a>
+  <script>
+    let currentRow = null;
+    function deleteRow(btn) {
+      let row = btn.parentNode.parentNode;
+      row.remove();
+      document.getElementById("editSection").style.display = "none";
+    }
+    function loadEdit(btn) {
+      currentRow = btn.parentNode.parentNode;
+      document.getElementById("editId").value = currentRow.cells[0].innerText;
+      document.getElementById("editName").value = currentRow.cells[1].innerText;
+      document.getElementById("editEmail").value = currentRow.cells[2].innerText;
+      document.getElementById("editDept").value = currentRow.cells[3].innerText;
+      document.getElementById("editDate").value = currentRow.cells[4].innerText;
+      document.getElementById("editGender").value = currentRow.cells[5].innerText;
+      document.getElementById("editType").value = currentRow.cells[6].innerText;
+      document.getElementById("editSection").style.display = "block";
+    }
+    function saveEdit() {
+      if (currentRow) {
+        currentRow.cells[0].innerText = document.getElementById("editId").value;
+        currentRow.cells[1].innerText = document.getElementById("editName").value;
+        currentRow.cells[2].innerText = document.getElementById("editEmail").value;
+        currentRow.cells[3].innerText = document.getElementById("editDept").value;
+        currentRow.cells[4].innerText = document.getElementById("editDate").value;
+        currentRow.cells[5].innerText = document.getElementById("editGender").value;
+        currentRow.cells[6].innerText = document.getElementById("editType").value;
+        document.getElementById("editSection").style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>
+
+
+

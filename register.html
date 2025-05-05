@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register Employee</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Employee Registration</h2>
+  <form id="employeeForm">
+    <label>ID: <input type="text" id="empId" required></label><br>
+    <label>Full Name: <input type="text" id="empName" required></label><br>
+    <label>Email: <input type="email" id="empEmail" required></label><br>
+    <label>Department:
+      <select id="empDept" required>
+        <option value="">--Select--</option>
+        <option>HR</option>
+        <option>Sales</option>
+        <option>IT</option>
+        <option>Marketing</option>
+      </select>
+    </label><br>
+    <label>Joining Date: <input type="date" id="empDate" required></label><br>
+    <label>Gender:
+      <input type="radio" name="empGender" value="Male"> Male
+      <input type="radio" name="empGender" value="Female"> Female
+      <input type="radio" name="empGender" value="Other"> Other
+    </label><br>
+    <label>
+      <input type="checkbox" id="empType"> Full-Time
+    </label><br><br>
+    <button type="submit">Add Employee</button>
+    <button type="reset">Reset</button>
+  </form>
+  <h3>Registered Employees</h3>
+  <table border="1" id="employeeTable">
+    <tr>
+      <th>ID</th><th>Name</th><th>Email</th><th>Department</th>
+      <th>Date</th><th>Gender</th><th>Type</th>
+    </tr>
+  </table>
+  <script>
+    document.getElementById("employeeForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      let id = document.getElementById("empId").value.trim();
+      let name = document.getElementById("empName").value.trim();
+      let email = document.getElementById("empEmail").value.trim();
+      let dept = document.getElementById("empDept").value;
+      let date = document.getElementById("empDate").value;
+      let genderInput = document.querySelector('input[name="empGender"]:checked');
+      let type = document.getElementById("empType").checked ? "Full-Time" : "Part-Time";
+      let idPattern = /^EMP\d{3}$/;
+      let namePattern = /^[A-Za-z\s]+$/;
+      let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!idPattern.test(id)) {
+        alert("ID must start with 'EMP' followed by 3 digits.");
+        return;
+      }
+      if (!namePattern.test(name)) {
+        alert("Name must contain only letters and spaces.");
+        return;
+      }
+      if (!emailPattern.test(email)) {
+        alert("Enter a valid email address.");
+        return;
+      }
+      if (!dept) {
+        alert("Please select a department.");
+        return;
+      }
+      if (!date) {
+        alert("Please select a joining date.");
+        return;
+      }
+      if (!genderInput) {
+        alert("Please select a gender.");
+        return;
+      }
+      let gender = genderInput.value;
+      let table = document.getElementById("employeeTable");
+      let row = table.insertRow();
+      row.insertCell(0).innerText = id;
+      row.insertCell(1).innerText = name;
+      row.insertCell(2).innerText = email;
+      row.insertCell(3).innerText = dept;
+      row.insertCell(4).innerText = date;
+      row.insertCell(5).innerText = gender;
+      row.insertCell(6).innerText = type;
+      document.getElementById("employeeForm").reset();
+    });
+  </script>
+</body>
+</html>
